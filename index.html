@@ -1,216 +1,908 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <title>Hi-Di Infotech - Cybersecurity Solutions</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
+<head>
+    <meta charset="utf-8">
+    <title>Hi-Di Infotech - Cybersecurity Solutions</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
 
-        <!-- Icon Font Stylesheet -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Libraries Stylesheet -->
-        <link rel="stylesheet" href="lib/animate/animate.min.css"/>
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="lib/animate/animate.min.css"/>
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        .header-carousel-item {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #000814 100%);
+            min-height: 600px;
+        }
+        
+        /* Dark overlay for better text contrast */
+        .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 8, 20, 0.7);
+            z-index: 5;
+        }
+        
+        .cyber-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Symmetric Grid Pattern */
+        .symmetric-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0, 195, 255, 0.1) 49px, rgba(0, 195, 255, 0.1) 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(0, 195, 255, 0.1) 49px, rgba(0, 195, 255, 0.1) 50px);
+            z-index: 1;
+        }
+        
+        /* Center focal point */
+        .center-focal {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(0, 195, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 2;
+            animation: centerPulse 4s ease-in-out infinite;
+        }
+        
+        /* Symmetric Network Nodes */
+        .symmetric-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 195, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
+            z-index: 3;
+            animation: nodePulse 3s ease-in-out infinite;
+        }
+        
+        /* Top row - symmetric */
+        .node-top-1 { top: 15%; left: 20%; }
+        .node-top-2 { top: 15%; left: 50%; transform: translateX(-50%); }
+        .node-top-3 { top: 15%; right: 20%; }
+        
+        /* Middle row - symmetric */
+        .node-mid-1 { top: 50%; left: 15%; transform: translateY(-50%); }
+        .node-mid-2 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .node-mid-3 { top: 50%; right: 15%; transform: translateY(-50%); }
+        
+        /* Bottom row - symmetric */
+        .node-bot-1 { bottom: 15%; left: 20%; }
+        .node-bot-2 { bottom: 15%; left: 50%; transform: translateX(-50%); }
+        .node-bot-3 { bottom: 15%; right: 20%; }
+        
+        /* Symmetric Connection Lines */
+        .symmetric-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.4), transparent);
+            z-index: 2;
+            animation: lineGlow 4s ease-in-out infinite;
+        }
+        
+        /* Horizontal lines */
+        .line-h1 { top: 15%; left: 20%; right: 20%; }
+        .line-h2 { top: 50%; left: 15%; right: 15%; transform: translateY(-50%); }
+        .line-h3 { bottom: 15%; left: 20%; right: 20%; }
+        
+        /* Vertical line */
+        .line-v1 {
+            width: 1px;
+            height: 70%;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, transparent, rgba(0, 195, 255, 0.4), transparent);
+        }
+        
+        /* Diagonal lines - symmetrical */
+        .diagonal-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transform-origin: left center;
+            z-index: 2;
+        }
+        
+        .diag-1 {
+            top: 15%;
+            left: 20%;
+            width: 30%;
+            transform: rotate(45deg);
+        }
+        
+        .diag-2 {
+            top: 15%;
+            right: 20%;
+            width: 30%;
+            transform: rotate(-45deg);
+            transform-origin: right center;
+        }
+        
+        .diag-3 {
+            bottom: 15%;
+            left: 20%;
+            width: 30%;
+            transform: rotate(-45deg);
+        }
+        
+        .diag-4 {
+            bottom: 15%;
+            right: 20%;
+            width: 30%;
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+        
+        /* Symmetric Hexagons */
+        .hex-symmetry {
+            position: absolute;
+            width: 50px;
+            height: 29px;
+            background: rgba(0, 195, 255, 0.15);
+            margin: 14.5px 0;
+            z-index: 2;
+        }
+        
+        .hex-symmetry:before,
+        .hex-symmetry:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+        }
+        
+        .hex-symmetry:before {
+            bottom: 100%;
+            border-bottom: 14.5px solid rgba(0, 195, 255, 0.15);
+        }
+        
+        .hex-symmetry:after {
+            top: 100%;
+            border-top: 14.5px solid rgba(0, 195, 255, 0.15);
+        }
+        
+        .hex-tl { top: 10%; left: 10%; animation: hexFloat 6s ease-in-out infinite; }
+        .hex-tr { top: 10%; right: 10%; animation: hexFloat 6s ease-in-out infinite; animation-delay: 0.5s; }
+        .hex-bl { bottom: 10%; left: 10%; animation: hexFloat 6s ease-in-out infinite; animation-delay: 1s; }
+        .hex-br { bottom: 10%; right: 10%; animation: hexFloat 6s ease-in-out infinite; animation-delay: 1.5s; }
+        
+        /* Symmetric Circles */
+        .symmetric-circle {
+            position: absolute;
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            border-radius: 50%;
+            z-index: 2;
+            animation: circleExpand 6s ease-in-out infinite;
+        }
+        
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .circle-2 {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+        
+        .circle-3 {
+            width: 350px;
+            height: 350px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 2s;
+        }
+        
+        /* Corner elements - symmetric */
+        .corner-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(0, 195, 255, 0.3);
+            z-index: 2;
+        }
+        
+        .corner-tl {
+            top: 5%;
+            left: 5%;
+            border-right: none;
+            border-bottom: none;
+            animation: cornerGlow 4s ease-in-out infinite;
+        }
+        
+        .corner-tr {
+            top: 5%;
+            right: 5%;
+            border-left: none;
+            border-bottom: none;
+            animation: cornerGlow 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        .corner-bl {
+            bottom: 5%;
+            left: 5%;
+            border-right: none;
+            border-top: none;
+            animation: cornerGlow 4s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .corner-br {
+            bottom: 5%;
+            right: 5%;
+            border-left: none;
+            border-top: none;
+            animation: cornerGlow 4s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+        
+        /* Data streams - subtle */
+        .data-stream-subtle {
+            position: absolute;
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 195, 255, 0.4), transparent);
+            z-index: 2;
+            animation: streamFlow 6s linear infinite;
+        }
+        
+        .stream-1 { left: 25%; top: -60px; animation-delay: 0s; }
+        .stream-2 { left: 50%; top: -60px; animation-delay: 2s; }
+        .stream-3 { right: 25%; top: -60px; animation-delay: 4s; }
+        
+        /* Animations */
+        @keyframes centerPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.25; }
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
+            }
+            50% { 
+                transform: scale(1.2); 
+                box-shadow: 0 0 25px rgba(0, 195, 255, 1);
+            }
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes hexFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-15px); opacity: 0.9; }
+        }
+        
+        @keyframes circleExpand {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.05); 
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes cornerGlow {
+            0%, 100% { 
+                border-color: rgba(0, 195, 255, 0.3);
+                box-shadow: 0 0 10px rgba(0, 195, 255, 0.2);
+            }
+            50% { 
+                border-color: rgba(0, 195, 255, 0.6);
+                box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            }
+        }
+        
+        @keyframes streamFlow {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        .carousel-caption {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .header-carousel-item {
+                min-height: 500px;
+            }
+            
+            .dark-overlay {
+                background: rgba(0, 8, 20, 0.85);
+            }
+            
+            .symmetric-grid {
+                opacity: 0.5;
+            }
+            
+            .center-focal,
+            .circle-1,
+            .circle-2,
+            .circle-3 {
+                display: none;
+            }
+            
+            .diagonal-line {
+                opacity: 0.3;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .dark-overlay {
+                background: rgba(0, 8, 20, 0.9);
+            }
+        }
+         body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
 
-    <body>
+        .feature-section {
+            
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+        .feature-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>');
+            opacity: 0.4;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: rgb(57, 136, 255);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .section-header h1 {
+            color: rgb(0, 0, 0);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .section-header p {
+            color: rgba(48, 48, 48, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .feature-card {
+            background: var(--bs-light);
+            border-radius: 24px;
+            padding: 40px 30px;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #01004d;
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            color: #3f3f3f;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .feature-btn {
+            background:#015fc9 ;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .feature-btn:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            color: rgb(34, 38, 255);
+        }
+
+        .feature-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Unique gradient for each card */
+        .card-1 .feature-icon {
+            background: #015fc9;
+        }
+        
+        .card-2 .feature-icon {
+            background: #015fc9;
+        }
+        
+        .card-3 .feature-icon {
+            background: #015fc9;
+        }
+        
+        .card-4 .feature-icon {
+            background: #015fc9;
+        }
+
+        @media (max-width: 768px) {
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
-        <!-- Spinner End -->
+    </div>
+    <!-- Spinner End -->
 
-        <!-- Topbar Start -->
-        <div class="container-fluid topbar px-0 px-lg-4 bg-light py-2 d-none d-lg-block">
-            <div class="container">
-                <div class="row gx-0 align-items-center">
-                    <div class="col-lg-8 text-center text-lg-start mb-lg-0">
-                        <div class="d-flex flex-wrap">
-                            
-                            <div class="ps-3">
-                                <a href="mailto:contact@hi-diinfotech.com" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>contact@hi-diinfotech.com</a>
-                            </div>
+    <!-- Topbar Start -->
+    <div class="container-fluid topbar px-0 px-lg-4 bg-light py-2 d-none d-lg-block">
+        <div class="container">
+            <div class="row gx-0 align-items-center">
+                <div class="col-lg-8 text-center text-lg-start mb-lg-0">
+                    <div class="d-flex flex-wrap">
+                        <div class="border-end border-primary pe-3">
+                            <a href="#" class="text-muted small"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find A Location</a>
+                        </div>
+                        <div class="ps-3">
+                            <a href="mailto:contact@hi-diinfotech.com" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>contact@hi-diinfotech.com</a>
                         </div>
                     </div>
-                    <div class="col-lg-4 text-center text-lg-end">
-                        <div class="d-flex justify-content-end">
-                            <div class="d-flex border-end border-primary pe-3">
-                                <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-instagram"></i></a>
-                                <a class="btn p-0 text-primary me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-flex justify-content-end">
+                        <div class="d-flex border-end border-primary pe-3">
+                            <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn p-0 text-primary me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <div class="dropdown ms-3">
+                            <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><small><i class="fas fa-globe-europe text-primary me-2"></i> English</small></a>
+                            <div class="dropdown-menu rounded">
+                                <a href="#" class="dropdown-item">English</a>
+                                <a href="#" class="dropdown-item">Bangla</a>
+                                <a href="#" class="dropdown-item">French</a>
+                                <a href="#" class="dropdown-item">Spanish</a>
+                                <a href="#" class="dropdown-item">Arabic</a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Topbar End -->
+    </div>
+    <!-- Topbar End -->
 
-        <!-- Navbar & Hero Start -->
-        <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light"> 
-                    <a href="#" class="navbar-brand p-0">
-                        <h1 class="text-primary mb-0"><i class="fas fa-shield-alt me-2"></i> Hi-Di Infotech</h1>
-                        <!-- <img src="img/logo.png" alt="Logo"> -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light"> 
+                <a href="#" class="navbar-brand p-0">
+                    <h1 class="text-primary mb-0"><i class="fas fa-shield-alt me-2"></i> Hi-Di Infotech</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-0 mx-lg-auto">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="blog.html" class="nav-item nav-link">Blog</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                                <span class="dropdown-toggle">Pages</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="feature.html" class="dropdown-item">Our Features</a>
+                                <a href="team.html" class="dropdown-item">Our team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="FAQ.html" class="dropdown-item">FAQs</a>
+                                <a href="404.html" class="dropdown-item">404 Page</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <div class="nav-btn px-3">
+                            <button class="btn-search btn btn-primary btn-md-square rounded-circle flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
+                            <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"> Get a Quote</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+                    <a href="#" class="btn btn-light btn-lg-square rounded-circle position-relative wow tada" data-wow-delay=".9s">
+                        <i class="fa fa-phone-alt fa-2x"></i>
+                        <div class="position-absolute" style="top: 7px; right: 12px;">
+                            <span><i class="fa fa-comment-dots text-secondary"></i></span>
+                        </div>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav mx-0 mx-lg-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Services</a>
-                            <a href="blog.html" class="nav-item nav-link">Blog</a>
-                            
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                            <div class="nav-btn px-3">
-                                
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"> Get a Quote</a>
-                            </div>
-                        </div>
+                    <div class="d-flex flex-column ms-3">
+                        <span>Call to Our Experts</span>
+                        <a href="tel:8778257542"><span class="text-dark">Free: 877-825-7542</span></a>
                     </div>
-                    <div class="d-none d-xl-flex flex-shrink-0 ps-4">
-                        <a href="#" class="btn btn-light btn-lg-square rounded-circle position-relative wow tada" data-wow-delay=".9s">
-                            <i class="fa fa-phone-alt fa-2x"></i>
-                            <div class="position-absolute" style="top: 7px; right: 12px;">
-                                <span><i class="fa fa-comment-dots text-secondary"></i></span>
-                            </div>
-                        </a>
-                        <div class="d-flex flex-column ms-3">
-                            <span>Call to Our Experts</span>
-                            <a href="tel:8778257542"><span class="text-dark">Free: 877-825-7542</span></a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </div>
-        <!-- Navbar & Hero End -->
+    </div>
+    <!-- Navbar & Hero End -->
 
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center bg-primary">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="btn bg-light border nput-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+    <!-- Modal Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center bg-primary">
+                    <div class="input-group w-75 mx-auto d-flex">
+                        <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                        <span id="search-icon-1" class="btn bg-light border nput-group-text p-3"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Modal Search End -->
+    </div>
+    <!-- Modal Search End -->
 
-        <!-- Carousel Start -->
-        <div class="header-carousel owl-carousel">
-            <div class="header-carousel-item bg-primary">
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row g-4 align-items-center">
-                            <div class="col-lg-7 animated fadeInLeft">
-                                <div class="text-sm-center text-md-start">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4">Welcome To Hi-Di Infotech</h4>
-                                    <h1 class="display-1 text-white mb-4">Secure Yourself With Us</h1>
-                                    <p class="mb-5 fs-5">Protect your digital infrastructure from unseen threats. Hi-Di Infotech delivers world-class cybersecurity and penetration testing solutions to help businesses stay one step ahead of cyber risks.</p>
-                                    <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
-                                        <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"></i> Contact Us</a>
-                                        <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2" href="#">Learn More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 animated fadeInRight">
-                                <div class="calrousel-img" style="object-fit: cover;">
-                                    <img src="img/carousel-2.png" class="img-fluid w-100" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Carousel Start -->
+    <div class="header-carousel owl-carousel">
+        <div class="header-carousel-item">
+            <!-- Symmetric Cybersecurity Network Background -->
+            <div class="cyber-bg">
+                <!-- Symmetric Grid -->
+                <div class="symmetric-grid"></div>
+                
+                <!-- Center Focal Point -->
+                <div class="center-focal"></div>
+                
+                <!-- Symmetric Concentric Circles -->
+                <div class="symmetric-circle circle-1"></div>
+                <div class="symmetric-circle circle-2"></div>
+                <div class="symmetric-circle circle-3"></div>
+                
+                <!-- Symmetric Network Nodes -->
+                <!-- Top row -->
+                <div class="symmetric-node node-top-1"></div>
+                <div class="symmetric-node node-top-2"></div>
+                <div class="symmetric-node node-top-3"></div>
+                
+                <!-- Middle row -->
+                <div class="symmetric-node node-mid-1"></div>
+                <div class="symmetric-node node-mid-2"></div>
+                <div class="symmetric-node node-mid-3"></div>
+                
+                <!-- Bottom row -->
+                <div class="symmetric-node node-bot-1"></div>
+                <div class="symmetric-node node-bot-2"></div>
+                <div class="symmetric-node node-bot-3"></div>
+                
+                <!-- Symmetric Horizontal Lines -->
+                <div class="symmetric-line line-h1"></div>
+                <div class="symmetric-line line-h2"></div>
+                <div class="symmetric-line line-h3"></div>
+                
+                <!-- Vertical Line -->
+                <div class="symmetric-line line-v1"></div>
+                
+                <!-- Diagonal Lines -->
+                <div class="diagonal-line diag-1"></div>
+                <div class="diagonal-line diag-2"></div>
+                <div class="diagonal-line diag-3"></div>
+                <div class="diagonal-line diag-4"></div>
+                
+                <!-- Symmetric Hexagons -->
+                <div class="hex-symmetry hex-tl"></div>
+                <div class="hex-symmetry hex-tr"></div>
+                <div class="hex-symmetry hex-bl"></div>
+                <div class="hex-symmetry hex-br"></div>
+                
+                <!-- Corner Elements -->
+                <div class="corner-element corner-tl"></div>
+                <div class="corner-element corner-tr"></div>
+                <div class="corner-element corner-bl"></div>
+                <div class="corner-element corner-br"></div>
+                
+                <!-- Data Streams -->
+                <div class="data-stream-subtle stream-1"></div>
+                <div class="data-stream-subtle stream-2"></div>
+                <div class="data-stream-subtle stream-3"></div>
             </div>
             
-        </div>
-        <!-- Carousel End -->
-
-        <!-- Feature Start -->
-        <div class="container-fluid feature bg-light py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-primary">Why You Need Cybersecurity Testing</h4>
-                    <h1 class="display-4 mb-4">Essential Protection for Your Digital Assets</h1>
-                    <p class="mb-0">In today's connected world, cyber threats evolve faster than technology. A single unpatched vulnerability can expose your data, customers, and reputation to massive risk.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="feature-item p-4 pt-0">
-                            <div class="feature-icon p-4 mb-4">
-                                <i class="fas fa-search fa-3x"></i>
+            <!-- Dark overlay for text contrast -->
+            <div class="dark-overlay"></div>
+            
+            <div class="carousel-caption">
+                <div class="container">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-7 animated fadeInLeft">
+                            <div class="text-sm-center text-md-start">
+                                <h4 class="text-white text-uppercase fw-bold mb-4">Welcome To Hi-Di Infotech</h4>
+                                <h1 class="display-1 text-white mb-4">Secure Yourself With Us</h1>
+                                <p class="mb-5 fs-5 text-white">Protect your digital infrastructure from unseen threats. Hi-Di Infotech delivers world-class cybersecurity and penetration testing solutions to help businesses stay one step ahead of cyber risks.</p>
+                                <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                    <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#">Contact Us</a>
+                                    <a class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2" href="#">Learn More</a>
+                                </div>
                             </div>
-                            <h4 class="mb-4">Identify Vulnerabilities</h4>
-                            <p class="mb-4">Identify and fix vulnerabilities early before attackers exploit them.</p>
-                            <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="feature-item p-4 pt-0">
-                            <div class="feature-icon p-4 mb-4">
-                                <i class="fas fa-file-contract fa-3x"></i>
+                        <div class="col-lg-5 animated fadeInRight">
+                            <div class="calrousel-img" style="object-fit: cover;">
+                                <img src="img/Carousel-1.png" class="img-fluid w-100" alt="">
                             </div>
-                            <h4 class="mb-4">Compliance Standards</h4>
-                            <p class="mb-4">Comply with global standards like ISO 27001, GDPR, PCI DSS, and HIPAA.</p>
-                            <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="feature-item p-4 pt-0">
-                            <div class="feature-icon p-4 mb-4">
-                                <i class="fas fa-user-shield fa-3x"></i>
-                            </div>
-                            <h4 class="mb-4">Build Customer Trust</h4>
-                            <p class="mb-4">Build customer trust by demonstrating a proactive security posture.</p>
-                            <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="feature-item p-4 pt-0">
-                            <div class="feature-icon p-4 mb-4">
-                                <i class="fas fa-shield-alt fa-3x"></i>
-                            </div>
-                            <h4 class="mb-4">Prevent Financial Loss</h4>
-                            <p class="mb-4">Prevent financial losses and downtime caused by breaches or ransomware.</p>
-                            <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Feature End -->
+    </div>
+    <!-- Carousel End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script>
+        // Spinner
+        var spinner = function () {
+            setTimeout(function () {
+                if ($('#spinner').length > 0) {
+                    $('#spinner').removeClass('show');
+                }
+            }, 1);
+        };
+        spinner();
+    </script>
+
+
+
+        <div class="feature-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🛡️ Why You Need Cybersecurity Testing</span>
+                <h1>Essential Protection for Your Digital Assets</h1>
+                <p>In today's connected world, cyber threats evolve faster than technology. A single unpatched vulnerability can expose your data, customers, and reputation to massive risk.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>Identify Vulnerabilities</h4>
+                        <p>Discover and patch security gaps before attackers exploit them. Stay one step ahead of threats.</p>
+                        <a href="#" class="feature-btn">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4>Compliance Standards</h4>
+                        <p>Meet global standards like ISO 27001, GDPR, PCI DSS, and HIPAA with confidence and ease.</p>
+                        <a href="#" class="feature-btn">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h4>Build Customer Trust</h4>
+                        <p>Demonstrate proactive security to earn lasting trust and loyalty from your customers.</p>
+                        <a href="#" class="feature-btn">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Prevent Financial Loss</h4>
+                        <p>Avoid costly breaches and downtime that can cripple your business operations and revenue.</p>
+                        <a href="#" class="feature-btn">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
         <!-- About Start -->
         <div class="container-fluid bg-light about pb-5">
